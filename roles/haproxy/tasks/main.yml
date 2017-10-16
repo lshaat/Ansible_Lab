@@ -1,0 +1,20 @@
+  - name: Install Web Server
+    package:
+      name: httpd
+      state: latest
+  - name: Install HA Proxy
+    yum:
+      name: haproxy
+      state: latest
+  - name: Enable HA Proxy
+    service:
+      name: haproxy
+      state: started
+  - name: Configure HA Proxy
+    template:
+      src: templates/haproxy.cfg.j2
+      dest: /etc/haproxy/haproxy.cfg
+  - name: Restart HA Proxy
+    service:
+      name: haproxy
+      state: restarted

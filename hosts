@@ -1,0 +1,38 @@
+###########################################################################
+### Ansible Vars
+###########################################################################
+#timeout=60
+#ansible_become=yes
+#ansible_ssh_user=ec2-user
+
+
+[GenericExample:children]
+frontends
+apps
+appdbs
+support
+app1
+app2
+
+[app1]
+app1.c898.internal ssh_host=ec2-34-204-177-89.compute-1.amazonaws.com
+
+[app2]
+app2.c898.internal ssh_host=ec2-34-231-122-119.compute-1.amazonaws.com
+
+[frontends]
+## These are the frontends
+frontend1.c898.internal ssh_host=ec2-34-194-174-151.compute-1.amazonaws.com
+
+[apps]
+## These are the apps
+app1.c898.internal ssh_host=ec2-34-204-177-89.compute-1.amazonaws.com
+app2.c898.internal ssh_host=ec2-34-231-122-119.compute-1.amazonaws.com
+
+[appdbs]
+## These are the appdbs
+appdb1.c898.internal ssh_host=ec2-34-236-192-166.compute-1.amazonaws.com
+
+## These are the supporthosts
+[support]
+support1.c898.internal ssh_host=ec2-34-225-194-3.compute-1.amazonaws.com

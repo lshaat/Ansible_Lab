@@ -1,0 +1,34 @@
+- name: Configuration my enviornment
+  hosts: all
+  gather_facts: no
+  become: true
+
+  tasks:
+  - name: enable repos
+    template:
+      src: ./open_three-tier-app.repo
+      dest: /etc/yum.repos.d/open_three-tier-app.repo
+      mode: 0644
+
+- name: Install Web Roles
+  hosts: apps
+  become: true
+  gather_facts: true
+  roles:
+    - apache
+    - tomcat
+
+- name: Install HA Proxy Role
+  hosts: frontends
+  become: true
+  gather_facts: true
+  roles:
+    - haproxy
+
+- name: Install DB Role
+  hosts: appdbs
+  become: true
+  gather_facts: true
+  roles:
+    - postgresql
+
